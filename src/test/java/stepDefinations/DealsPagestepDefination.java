@@ -7,11 +7,13 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 
 import io.cucumber.java.en.Then;
+import pageObjects.DealsPage;
+import pageObjects.LandingPage;
 import utilities.TestContextSetup;
 
 public class DealsPagestepDefination {
 	
-	public String DealsProdName; 
+	
 	TestContextSetup testContextSetup;
 	
 	
@@ -24,32 +26,28 @@ public DealsPagestepDefination(TestContextSetup testContextSetup) {
 	@Then("user searched for the same name {string} in deals page")
 	public void user_searched_for_the_same_name_in_deals_page(String prodStName) {
 		
-		testContextSetup.driver.findElement(By.linkText("Top Deals")).click();
-		Set<String> windows=testContextSetup.driver.getWindowHandles();
+		DealsPage dealPage=new DealsPage(testContextSetup.driver);
+		LandingPage landingPage= new LandingPage(testContextSetup.driver);
 		
-		Iterator<String> it=windows.iterator();
+		landingPage.switchtoDealsPage();
 		
-		String parentWin=it.next();
-		String childWin=it.next();
-		testContextSetup.driver.switchTo().window(childWin);
-		
-		testContextSetup.driver.findElement(By.cssSelector("#search-field")).sendKeys(prodStName);
-		
-		DealsProdName=testContextSetup.driver.findElement(By.cssSelector("tbody tr td:nth-child(1)")).getText();
-		System.out.println(DealsProdName);
-		
-		
+		dealPage.searchProduct(prodStName);
+		dealPage.grabDealPageProName();
 	
 	 	}
 	
 	@Then("validate product name in Homepage and Deals page are same")
 	public void validate_product_name_in_homepage_and_deals_page_are_same() {
-	   
 		
-		Assert.assertEquals(DealsProdName, testContextSetup.FinalProductName);
+		
+		DealsPage dealPage=new DealsPage(testContextSetup.driver);
+		
+		Assert.assertEquals(dealPage.grabDealPageProName(), testContextSetup.FinalProductName);
 		testContextSetup.driver.quit();
 		
 	}
+	
+	
 	
 	
 

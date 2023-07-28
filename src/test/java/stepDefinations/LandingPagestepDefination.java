@@ -13,6 +13,7 @@ import org.testng.Assert;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import pageObjects.LandingPage;
 import utilities.TestContextSetup;
 
 public class LandingPagestepDefination {
@@ -40,18 +41,19 @@ public class LandingPagestepDefination {
 	}
 
 	@When("user searched for name {string} in the searchbar and extract actual product name")
-	public void user_searched_for_name_in_the_searchbar_and_extract_actual_product_name(String prodStName) {
+	public void user_searched_for_name_in_the_searchbar_and_extract_actual_product_name(String prodStName) throws InterruptedException {
+		
+		LandingPage landingPage=new LandingPage(testContextSetup.driver);
+		
+		landingPage.searchproduct(prodStName);
 		
 		
-		testContextSetup.driver.findElement(By.cssSelector("input[type='search']")).sendKeys(prodStName);
-		WebDriverWait wait=new WebDriverWait(testContextSetup.driver, Duration.ofSeconds(10));
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h4[class='product-name']")));
+		Thread.sleep(3000);
+		//WebDriverWait wait=new WebDriverWait(testContextSetup.driver, Duration.ofSeconds(10));
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h4[class='product-name']")));
 		
-		String ProductName=testContextSetup.driver.findElement(By.cssSelector("h4[class='product-name']")).getText();
-		System.out.println(ProductName);
+		testContextSetup.FinalProductName=landingPage.grabProductName();
 		
-		String[] splitedPro=ProductName.split("-");
-		testContextSetup.FinalProductName=splitedPro[0].trim();
 		System.out.println(testContextSetup.FinalProductName);
 		
 		Assert.assertEquals(testContextSetup.FinalProductName, "Tomato");
