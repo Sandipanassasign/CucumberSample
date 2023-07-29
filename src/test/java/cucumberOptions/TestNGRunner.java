@@ -7,8 +7,10 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(features = "src\\test\\java\\features\\",
 				glue = "stepDefinations",monochrome = true,
-				plugin = {"pretty","html:target/cucumber.html","json:target/cucumber.json"},
-				tags = "@Placeorder or @SerachProduct"
+				plugin = {"pretty","html:target/cucumber.html","json:target/cucumber.json",
+						"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
+							},
+				tags = "@Placeorder or @SearchProduct"
 		
 				)
 public class TestNGRunner extends AbstractTestNGCucumberTests {
