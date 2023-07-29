@@ -27,7 +27,7 @@ public void switchtoDealsPage() {
 		
 		Iterator<String> it=windows.iterator();
 		
-		String parentWin=it.next();
+		String parentsWin=it.next();
 		String childWin=it.next();
 		driver.switchTo().window(childWin);
 	}
