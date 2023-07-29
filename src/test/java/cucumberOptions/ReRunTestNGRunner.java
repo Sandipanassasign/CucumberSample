@@ -5,18 +5,18 @@ import org.testng.annotations.DataProvider;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
-@CucumberOptions(features = "src\\test\\java\\features\\",
+@CucumberOptions(features = "@target/rerun.txt",
 				glue = "stepDefinations",monochrome = true,
 				plugin = {"pretty","html:target/cucumber.html","json:target/cucumber.json",
 						"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
 						"rerun:target/rerun.txt"
-						},
+						}
 						
-				tags = "@Placeorder or @SearchProduct"
+				
 				
 		
 				)
-public class TestNGRunner extends AbstractTestNGCucumberTests {
+public class ReRunTestNGRunner extends AbstractTestNGCucumberTests {
 	
 	@Override
 	@DataProvider(parallel = true)	
