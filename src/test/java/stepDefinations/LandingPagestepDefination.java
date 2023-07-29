@@ -14,12 +14,14 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import pageObjects.LandingPage;
+import pageObjects.PageObjectManager;
 import utilities.TestContextSetup;
 
 public class LandingPagestepDefination {
 	
 	public WebDriver driver;
 	public String FinalProductName;
+	public PageObjectManager pageObjectManager;
 	
 	TestContextSetup testContextSetup;
 	
@@ -43,8 +45,9 @@ public class LandingPagestepDefination {
 	@When("user searched for name {string} in the searchbar and extract actual product name")
 	public void user_searched_for_name_in_the_searchbar_and_extract_actual_product_name(String prodStName) throws InterruptedException {
 		
-		LandingPage landingPage=new LandingPage(testContextSetup.driver);
 		
+		
+		LandingPage landingPage= testContextSetup.pageObjectManager.getLandingPage();
 		landingPage.searchproduct(prodStName);
 		
 		

@@ -42,17 +42,7 @@ public class LandingPage {
 	}
 	
 	
-		public void switchtoDealsPage() {
 		
-		driver.findElement(By.linkText("Top Deals")).click();
-		Set<String> windows=driver.getWindowHandles();
-		
-		Iterator<String> it=windows.iterator();
-		
-		String parentWin=it.next();
-		String childWin=it.next();
-		driver.switchTo().window(childWin);
-	}
 	
 	
 	

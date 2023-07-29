@@ -9,6 +9,7 @@ import org.testng.Assert;
 import io.cucumber.java.en.Then;
 import pageObjects.DealsPage;
 import pageObjects.LandingPage;
+import utilities.GenericUtils;
 import utilities.TestContextSetup;
 
 public class DealsPagestepDefination {
@@ -26,10 +27,10 @@ public DealsPagestepDefination(TestContextSetup testContextSetup) {
 	@Then("user searched for the same name {string} in deals page")
 	public void user_searched_for_the_same_name_in_deals_page(String prodStName) {
 		
-		DealsPage dealPage=new DealsPage(testContextSetup.driver);
-		LandingPage landingPage= new LandingPage(testContextSetup.driver);
+		DealsPage dealPage=testContextSetup.pageObjectManager.getDealsPage();
+		LandingPage landingPage= testContextSetup.pageObjectManager.getLandingPage() ;
 		
-		landingPage.switchtoDealsPage();
+		testContextSetup.genericUtils.switchtoDealsPage();
 		
 		dealPage.searchProduct(prodStName);
 		dealPage.grabDealPageProName();
@@ -40,7 +41,7 @@ public DealsPagestepDefination(TestContextSetup testContextSetup) {
 	public void validate_product_name_in_homepage_and_deals_page_are_same() {
 		
 		
-		DealsPage dealPage=new DealsPage(testContextSetup.driver);
+		DealsPage dealPage=testContextSetup.pageObjectManager.getDealsPage();
 		
 		Assert.assertEquals(dealPage.grabDealPageProName(), testContextSetup.FinalProductName);
 		testContextSetup.driver.quit();
