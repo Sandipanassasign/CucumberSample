@@ -1,10 +1,12 @@
 package utilities;
 
+import java.time.Duration;
 import java.util.Iterator;
 import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class GenericUtils {
 	
@@ -29,5 +31,12 @@ public void switchtoDealsPage() {
 		String childWin=it.next();
 		driver.switchTo().window(childWin);
 	}
+
+public WebDriverWait explecitWait() {
+	
+		WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
+		return wait;
+	
+}
 
 }

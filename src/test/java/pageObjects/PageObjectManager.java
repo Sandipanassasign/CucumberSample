@@ -6,7 +6,8 @@ public class PageObjectManager {
 	
 	public LandingPage landingPage;
 	public DealsPage dealsPage;
-	WebDriver driver;
+	public SummaryPage summaryPage;
+	public WebDriver driver;
 	
 	public PageObjectManager(WebDriver driver) {
 		
@@ -28,6 +29,13 @@ public class PageObjectManager {
 		
 		dealsPage=new DealsPage(driver);
 		return dealsPage;
+		
+	}
+	
+	public SummaryPage getSummaryPage() {
+		
+		summaryPage=new SummaryPage(driver);
+		return summaryPage;
 		
 	}
 

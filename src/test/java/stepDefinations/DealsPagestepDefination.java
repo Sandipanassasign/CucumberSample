@@ -16,19 +16,20 @@ public class DealsPagestepDefination {
 	
 	
 	TestContextSetup testContextSetup;
-	
+	DealsPage dealPage;
 	
 public DealsPagestepDefination(TestContextSetup testContextSetup) {
 		
 		this.testContextSetup=testContextSetup;
+		this.dealPage=testContextSetup.pageObjectManager.getDealsPage();
 	}
 
 	
-	@Then("user searched for the same name {string} in deals page")
+	@Then("^user searched for the same name (.+) in deals page$")
 	public void user_searched_for_the_same_name_in_deals_page(String prodStName) {
 		
-		DealsPage dealPage=testContextSetup.pageObjectManager.getDealsPage();
-		LandingPage landingPage= testContextSetup.pageObjectManager.getLandingPage() ;
+		
+		
 		
 		testContextSetup.genericUtils.switchtoDealsPage();
 		
@@ -41,10 +42,10 @@ public DealsPagestepDefination(TestContextSetup testContextSetup) {
 	public void validate_product_name_in_homepage_and_deals_page_are_same() {
 		
 		
-		DealsPage dealPage=testContextSetup.pageObjectManager.getDealsPage();
+		
 		
 		Assert.assertEquals(dealPage.grabDealPageProName(), testContextSetup.FinalProductName);
-		testContextSetup.driver.quit();
+		
 		
 	}
 	
